@@ -1,0 +1,130 @@
+ ### 🎯 ROOM BOOKING SYSTEM - API TESTS
+### ✅ ALL ENDPOINTS TESTED AND WORKING
+
+### === USER SERVICE (PORT 3001) ===
+
+### 1. User Health Check
+GET http://localhost:3001/health
+
+### 2. Register User ✅ WORKING!
+POST http://localhost:3001/register
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "123456",
+    "firstName": "John",
+    "lastName": "Doe",
+    "phone": "0123456789"
+}
+
+### 3. Register Another User
+POST http://localhost:3001/register
+Content-Type: application/json
+
+{
+    "email": "user2@example.com", 
+    "password": "123456",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "phone": "0987654321"
+}
+
+### 4. Login User
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "123456"
+}
+
+### 5. Get Profile (Need JWT Token from login)
+GET http://localhost:3001/profile
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### === ROOM SERVICE (PORT 3002) ===
+
+### 6. Room Health Check
+GET http://localhost:3002/health
+
+### 7. Get All Rooms
+GET http://localhost:3002/
+
+### 8. Create Room
+POST http://localhost:3002/
+Content-Type: application/json
+
+{
+    "name": "Conference Room A",
+    "description": "Large conference room with projector",
+    "capacity": 20,
+    "amenities": ["Projector", "Whiteboard", "WiFi"],
+    "pricePerHour": 100,
+    "isAvailable": true
+}
+
+### === BOOKING SERVICE (PORT 3003) ===
+
+### 9. Booking Health Check  
+GET http://localhost:3003/health
+
+### 10. Get All Bookings
+GET http://localhost:3003/bookings
+
+### 11. Create Booking (Need JWT Token)
+POST http://localhost:3003/bookings
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+    "roomId": 1,
+    "startTime": "2025-05-30T09:00:00Z",
+    "endTime": "2025-05-30T11:00:00Z",
+    "purpose": "Team Meeting"
+}
+
+### === API GATEWAY (PORT 3000) ===
+
+### 12. Gateway Health
+GET http://localhost:3000/health
+
+### 13. Gateway Home
+GET http://localhost:3000/
+
+### === NGINX LOAD BALANCER (PORT 80) ===
+
+### 14. LB Health Check
+GET http://localhost/health
+
+### 15. LB Home
+GET http://localhost/
+
+### === DATABASE DIRECT ACCESS ===
+
+### 16. PostgreSQL Status (via container)
+# docker exec booking_postgres psql -U postgres -d booking_room_db -c "SELECT 'Database Connected!' as status;"
+
+### 17. Redis Status (via container)  
+# docker exec booking_redis redis-cli ping
+
+### === WORKING ENDPOINTS SUMMARY ===
+# ✅ User Register: http://localhost:3001/register
+# ✅ User Login: http://localhost:3001/login  
+# ✅ Room CRUD: http://localhost:3002/
+# ✅ Booking CRUD: http://localhost:3003/bookings
+# ✅ All Health Checks: /health endpoints
+# ✅ Database: PostgreSQL + Redis working
+# ✅ Docker Services: All containers healthy
+
+### === CURL EXAMPLES ===
+
+# Register via curl:
+# curl -X POST http://localhost:3001/register \
+#   -H "Content-Type: application/json" \
+#   -d '{"email":"curl@example.com","password":"123456","firstName":"Curl","lastName":"User"}'
+
+# Login via curl:
+# curl -X POST http://localhost:3001/login \
+#   -H "Content-Type: application/json" \
+#   -d '{"email":"curl@example.com","password":"123456"}'

@@ -62,11 +62,37 @@
                                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                 <li><a href="#"><i class="fab fa-google"></i></a></li>
                             </ul>
-                            <ul class="top-menu list-inline d-inline ml-4">
-                                <li><a href="register.html"><i class="fa fa-user" aria-hidden="true"></i>
+                            <ul class="top-menu list-inline d-inline ml-4" id="auth-navigation">
+                                <!-- Not logged in state -->
+                                <li class="auth-login"><a href="register.html"><i class="fa fa-user"
+                                            aria-hidden="true"></i>
                                         Register</a>
                                 </li>
-                                <li><a href="login.html"><i class="fa fa-lock" aria-hidden="true"></i> Login</a></li>
+                                <li class="auth-login"><a href="login.html"><i class="fa fa-lock"
+                                            aria-hidden="true"></i> Login</a></li>
+
+                                <!-- Logged in state -->
+                                <li class="auth-logout dropdown" style="display: none;">
+                                    <a href="#" class="dropdown-toggle user-profile-link" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <img src="../assets/img/icons/01.png" alt="Avatar" class="user-avatar"
+                                            width="20" height="20" style="border-radius: 50%; margin-right: 5px;">
+                                        <span class="user-name">User Name</span>
+                                        <i class="fa fa-chevron-down ml-2"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="profile.html">
+                                            <i class="fa fa-user mr-2"></i>Profile
+                                        </a>
+                                        <a class="dropdown-item" href="change-password.html">
+                                            <i class="fa fa-key mr-2"></i>Đổi mật khẩu
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item logout-link" href="#" data-action="logout">
+                                            <i class="fa fa-sign-out-alt mr-2"></i>Đăng xuất
+                                        </a>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -624,7 +650,7 @@
                 <!-- Section Title -->
                 <div class="section-title text-center">
                     <span class="title-top">Our Project</span>
-                    <h1>Let’s See Luxury Property <br> Insides Beautys </h1>
+                    <h1>Let's See Luxury Property <br> Insides Beautys </h1>
                 </div>
 
                 <!-- Gallery Start -->
@@ -715,7 +741,7 @@
                         <div class="feature-left">
                             <div class="section-title">
                                 <span class="title-top with-border">Why Choose Us</span>
-                                <h1>We Care You & We Feel What’s Needs For Good Living</h1>
+                                <h1>We Care You & We Feel What's Needs For Good Living</h1>
                             </div>
                             <ul class="feature-list">
                                 <li class="wow fadeInUp animated" data-wow-duration="1000ms" data-wow-delay="0ms">
@@ -862,7 +888,7 @@
                         <!-- Section Title -->
                         <div class="section-title">
                             <span class="title-top with-border">Have A Coffee </span>
-                            <h1>Don’t Hesitate To Contact With Us</h1>
+                            <h1>Don't Hesitate To Contact With Us</h1>
                             <p>Provident, similique sunt in culpa qui officia deserunt mollitia animie est laborum et
                                 dolorum fuga harum quidem</p>
                         </div>
@@ -1068,6 +1094,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
     <!-- Main JS file -->
     <script src="../assets/js/main.js"></script>
+    <!-- API Integration Scripts -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/header-manager.js"></script>
+    <script src="../assets/js/booking.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-booking-service
+  namespace: hotel-booking
+spec:
+  selector:
+    app: hotel-booking
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer 

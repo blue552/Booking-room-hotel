@@ -1,0 +1,153 @@
+### Test server is running
+GET http://localhost:8080
+### Register new user
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "email": "test4@example.com",
+    "password": "123456",
+    "firstName": "John",
+    "lastName": "Doe",
+    "phone": "1234567890"
+}
+
+### Login user
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "email": "test4@example.com",
+    "password": "123456"
+}
+
+### Get user profile (requires token)
+GET http://localhost:3000/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+
+### Update user profile (requires token)
+PUT http://localhost:3000/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+Content-Type: application/json
+
+{
+    "firstName": "John Updated",
+    "lastName": "Doe Updated",
+    "phone": "0987654321"
+}
+
+### Change password (requires token)
+PUT http://localhost:3000/users/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+Content-Type: application/json
+
+{
+    "currentPassword": "123456",
+    "newPassword": "newpassword123"
+}
+
+### Get all users (admin only, requires token)
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+
+### Update user (admin only, requires token)
+PUT http://localhost:3000/users/1
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+    "firstName": "Admin Updated",
+    "lastName": "User Updated",
+    "role": "admin"
+}
+
+### Delete user (admin only, requires token)
+DELETE http://localhost:3000/users/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+
+### Get all rooms
+GET http://localhost:3000/rooms
+
+### Get room by ID
+GET http://localhost:3000/rooms/1
+
+### Create new room
+POST http://localhost:3000/rooms
+Content-Type: application/json
+
+{
+    "roomNumber": "101",
+    "roomType": "Deluxe",
+    "price": 100.00,
+    "status": "available",
+    "amenities": {
+        "wifi": true,
+        "tv": true,
+        "minibar": true,
+        "airConditioning": true
+    },
+    "images": [
+        "room3.jpg",
+        "room4.jpg"
+    ]
+}
+
+### Update room (PUT)
+PUT http://localhost:3000/rooms/1
+Content-Type: application/json
+
+{
+    "roomNumber": "101",
+    "roomType": "Deluxe",
+    "price": 150.00,
+    "status": "occupied",
+    "amenities": {
+        "wifi": true,
+        "tv": true,
+        "minibar": true,
+        "airConditioning": true,
+        "roomService": true
+    },
+    "images": [
+        "room1.jpg",
+        "room2.jpg",
+        "room3.jpg"
+    ]
+}
+
+### Partial update room (PATCH)
+PATCH http://localhost:3000/rooms/1
+Content-Type: application/json
+
+{
+    "price": 200.00,
+    "status": "maintenance"
+}
+
+### Delete room
+DELETE http://localhost:3000/rooms/1
+
+### Create booking
+POST http://localhost:3000/bookings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+
+{
+    "roomId": 1,
+    "checkIn": "2024-04-04",
+    "checkOut": "2024-04-30",
+    "guests": 2,
+    "specialRequests": "Early check-in"
+}
+
+### Get user's bookings
+GET http://localhost:3000/bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+
+### Get booking by ID
+GET http://localhost:3000/bookings/:id
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs
+
+### Cancel booking
+DELETE http://localhost:3000/bookings/:id
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ4MzQyMzQyLCJleHAiOjE3NDg0Mjg3NDJ9.vbHwmkZECwvpLwscyHOiTI2cw5Mzi4zr_mklGQDZUqs

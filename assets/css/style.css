@@ -630,14 +630,6 @@ ul.list-inline li {
 	padding: 20px 0;
 }
 
-.header-top-area a {
-	color: #666565;
-}
-
-.header-top-area a:hover {
-	color: #fea116;
-}
-
 .header-top-area .top-contact-info li {
 	margin-right: 30px;
 }
@@ -649,12 +641,37 @@ ul.list-inline li {
 }
 
 .header-top-area .top-social-icon {
-	margin-left: 40px;
+	margin-left: 0;
+	margin-right: 20px;
+}
+
+.header-top-area .top-social-icon,
+.header-top-area .top-menu {
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
 }
 
 .header-top-area .top-social-icon li,
 .header-top-area .top-menu li {
 	margin-left: 18px;
+	display: inline-flex;
+	align-items: center;
+}
+
+.header-top-area .top-social-icon li a {
+	display: flex;
+	align-items: center;
+	color: #fff !important;
+	/* Sửa từ red thành #fff và thêm !important */
+	line-height: 1;
+	height: auto;
+	font-size: 14px;
+}
+
+.header-top-area .top-social-icon li a:hover {
+	color: #fea116 !important;
+	/* Màu hover vàng */
 }
 
 .header-menu-area {
@@ -6170,4 +6187,340 @@ footer .footer-bottom ul.social-icons {
 
 /* End Footer area
 ============================================================================================ */
-/*# sourceMappingURL=style.css.map */
+/* User Profile Dropdown Styles */
+.user-profile-link {
+	display: flex !important;
+	align-items: center;
+	padding: 0;
+	text-decoration: none;
+	color: #fea116 !important;
+	/* Thay đổi thành cùng màu với Login/Register */
+	transition: all 0.3s ease;
+	vertical-align: middle;
+	height: auto;
+	line-height: 1;
+	font-weight: 600;
+	/* Thêm font-weight để đồng nhất */
+}
+
+.user-profile-link:hover {
+	text-decoration: none;
+	color: #fff !important;
+	/* Hover thì chuyển thành màu trắng */
+	background-color: rgba(254, 161, 22, 0.1);
+	/* Thêm background nhẹ khi hover */
+	padding: 2px 8px;
+	border-radius: 3px;
+}
+
+.user-avatar {
+	width: 20px !important;
+	height: 20px !important;
+	border: 1px solid #fff;
+	box-shadow: none;
+	object-fit: cover;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.user-name {
+	font-size: 14px;
+	margin-right: 5px;
+	vertical-align: middle;
+	line-height: 1;
+}
+
+.dropdown-menu {
+	border: none;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	margin-top: 5px;
+	min-width: 200px;
+}
+
+.dropdown-item {
+	padding: 10px 15px;
+	display: flex;
+	align-items: center;
+	color: #333;
+	transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+	background-color: #f8f9fa;
+	color: #333;
+}
+
+.dropdown-item i {
+	width: 16px;
+	text-align: center;
+}
+
+.dropdown-divider {
+	margin: 5px 0;
+	border-top: 1px solid #eee;
+}
+
+/* Ensure auth menu items align properly */
+.header-top-area .top-menu {
+	margin-left: 0;
+	margin-bottom: 0;
+}
+
+.header-top-area .top-menu li a {
+	color: #fff;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	line-height: 1;
+	padding: 0;
+	height: auto;
+}
+
+.header-top-area .top-menu li a:hover {
+	color: #fea116;
+}
+
+.header-top-area .top-menu li a i {
+	margin-right: 5px;
+	font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.header-top-area .top-right {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.header-top-area .top-social-icon {
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+
+	.user-profile-link {
+		padding: 2px 5px;
+	}
+
+	.user-avatar {
+		width: 18px !important;
+		height: 18px !important;
+		margin-right: 3px;
+	}
+
+	.user-name {
+		display: none;
+	}
+
+	.dropdown-menu {
+		min-width: 180px;
+	}
+}
+
+.user-profile-link .fa-chevron-down {
+	font-size: 12px;
+	margin-left: 3px;
+	vertical-align: middle;
+}
+
+/* Header top area alignment fixes */
+.header-top-area .top-right {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: nowrap;
+	/* Thêm để ngăn wrap xuống dòng */
+}
+
+.header-top-area .top-social-icon {
+	margin-left: 0;
+	margin-right: 10px;
+	/* Tăng từ 5px lên 10px để có khoảng cách */
+}
+
+.header-top-area .top-social-icon,
+.header-top-area .top-menu {
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
+	flex-direction: row;
+	/* Đảm bảo hiển thị theo hàng ngang */
+}
+
+.header-top-area .top-social-icon li,
+.header-top-area .top-menu li {
+	margin-left: 15px;
+	display: inline-flex;
+	align-items: center;
+	white-space: nowrap;
+	/* Ngăn text xuống dòng */
+}
+
+/* Khôi phục màu cho social icons */
+.header-top-area .top-social-icon li a {
+	display: flex;
+	align-items: center;
+	color: #fea116;
+	/* Sửa từ red thành #fff và thêm !important */
+	line-height: 1;
+	height: auto;
+	font-size: 14px;
+}
+
+.header-top-area .top-social-icon li a:hover {
+	color: #fea116 !important;
+	/* Màu hover vàng cho social icons */
+}
+
+/* Auth menu styling */
+.header-top-area .top-menu li a {
+	display: flex;
+	align-items: center;
+	color: #fea116 !important;
+	/* Thay đổi từ #fff thành #fea116 (màu vàng) để dễ nhìn */
+	line-height: 1;
+	height: auto;
+	font-size: 14px;
+	font-weight: 500;
+	/* Thêm font-weight để chữ đậm hơn */
+}
+
+.header-top-area .top-menu li a:hover {
+	color: #fff !important;
+	/* Hover thì chuyển thành màu trắng */
+	background-color: rgba(254, 161, 22, 0.1);
+	/* Thêm background nhẹ khi hover */
+	padding: 2px 8px;
+	border-radius: 3px;
+}
+
+.header-top-area .top-contact-info a {
+	color: #666565;
+}
+
+.header-top-area .top-contact-info a:hover {
+	color: #fea116;
+}
+
+/* End of CSS file */
+
+/* Fix Social Icons Color - High Priority Override */
+.header-top-area .top-social-icon li a,
+.header-top-area .top-social-icon li a i {
+	color: #fea116 !important;
+	font-size: 14px !important;
+	font-weight: 500 !important;
+}
+
+.header-top-area .top-social-icon li a:hover,
+.header-top-area .top-social-icon li a:hover i {
+	color: #fff !important;
+	background-color: rgba(254, 161, 22, 0.2);
+	padding: 2px 6px;
+	border-radius: 3px;
+}
+
+/* Specific CSS for each social platform icons */
+.header-top-area .top-social-icon li a .fa-facebook,
+.header-top-area .top-social-icon li a .fa-facebook-f,
+.header-top-area .top-social-icon li a .fab.fa-facebook,
+.header-top-area .top-social-icon li a .fab.fa-facebook-f,
+.header-top-area .top-social-icon li a .fa-google,
+.header-top-area .top-social-icon li a .fa-google-plus,
+.header-top-area .top-social-icon li a .fab.fa-google,
+.header-top-area .top-social-icon li a .fab.fa-google-plus,
+.header-top-area .top-social-icon li a .fa-twitter,
+.header-top-area .top-social-icon li a .fab.fa-twitter,
+.header-top-area .top-social-icon li a .fa-instagram,
+.header-top-area .top-social-icon li a .fab.fa-instagram {
+	color: #fea116 !important;
+}
+
+.header-top-area .top-menu.ml-4 {
+	margin-left: 1rem !important;
+}
+
+/* Fix Dropdown Menu Display Issues */
+.header-top-area .dropdown {
+	position: relative;
+}
+
+.header-top-area .dropdown-menu {
+	position: absolute !important;
+	top: 100% !important;
+	right: 0 !important;
+	left: auto !important;
+	z-index: 1050 !important;
+	display: none;
+	float: left;
+	min-width: 200px;
+	padding: 5px 0;
+	margin: 2px 0 0;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 8px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.header-top-area .dropdown-menu.show {
+	display: block !important;
+}
+
+.header-top-area .dropdown-toggle {
+	position: relative;
+	cursor: pointer;
+}
+
+.header-top-area .dropdown-toggle::after {
+	display: inline-block;
+	margin-left: .255em;
+	vertical-align: .255em;
+	content: "";
+	border-top: .3em solid;
+	border-right: .3em solid transparent;
+	border-bottom: 0;
+	border-left: .3em solid transparent;
+}
+
+/* Ensure dropdown items are properly styled */
+.header-top-area .dropdown-item {
+	display: block;
+	width: 100%;
+	padding: 8px 16px;
+	clear: both;
+	font-weight: 400;
+	color: #212529;
+	text-align: inherit;
+	white-space: nowrap;
+	background-color: transparent;
+	border: 0;
+	text-decoration: none;
+}
+
+.header-top-area .dropdown-item:hover,
+.header-top-area .dropdown-item:focus {
+	color: #16181b;
+	background-color: #f8f9fa;
+	text-decoration: none;
+}
+
+/* Dropdown divider */
+.header-top-area .dropdown-divider {
+	height: 0;
+	margin: 5px 0;
+	overflow: hidden;
+	border-top: 1px solid #e9ecef;
+}
+
+/* Profile link should not trigger logout */
+.header-top-area .user-profile-link {
+	cursor: pointer;
+	text-decoration: none !important;
+}
+
+.header-top-area .user-profile-link:hover {
+	color: #fea116 !important;
+	text-decoration: none !important;
+}

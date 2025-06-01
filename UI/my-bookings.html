@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Author: Nguyễn Đức Bảo- Date: 6-6-2024 -->
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Bookings - Hotel Management</title>
+    <!-- Font Awesome Css -->
+    <link rel="stylesheet" href="../assets/css/all.min.css">
+    <!-- Bootstrap version 4.4.1 -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-4.4.1.min.css" />
+    <!-- animate css -->
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <!-- magnific popup version 1.1.0 -->
+    <link rel="stylesheet" href="../assets/css/magnific-popup-1.1.0.css">
+    <!-- Nice Select  -->
+    <link rel="stylesheet" href="../assets/css/nice-select-1.0.css">
+    <!-- meanmenu version 2.0.7 -->
+    <link rel="stylesheet" href="../assets/css/meanmenu-2.0.7.min.css">
+    <!-- Slick Version 1.9.0 -->
+    <link rel="stylesheet" href="../assets/css/slick-1.9.0.css" />
+    <!-- datetimepicker -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-datepicker.css" />
+    <!-- jQuery Ui for price range slide -->
+    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <!-- Responsive Css -->
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+    	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+    <!-- preloader -->
+    <div class="loader" id="preLoader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Header Top area Start -->
+    <section class="header-top-area bg-img-center position-relative"
+        style="background-image: url('../assets/img/bg/header-bg.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="header-top-left">
+                        <ul class="top-contact-info list-inline">
+                            <li><a href="#"><i class="far fa-envelope"></i>Hotelbooking@email.com</a>
+                            </li>
+                            <li><a href="#"><i class="far fa-phone"></i>+89 (456) 789 999</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="header-top-right text-right">
+                        <div class="top-right d-flex align-items-center justify-content-end">
+                            <ul class="top-social-icon list-inline">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google"></i></a></li>
+                            </ul>
+                            <ul class="top-menu list-inline d-inline ml-4" id="auth-navigation">
+                                <!-- Authentication links will be populated by header-manager.js -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Header Top area End -->
+
+    <!-- Header Menu area start -->
+    <section class="header-menu-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="../assets/img/logo.png" alt="Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="menu-right-area">
+                        <nav>
+                            <ul class="main-menu list-inline">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="room.html">Room</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <a href="#" class="btn filled-btn quote-btn">Booking now<i class="fal fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Header Menu area End -->
+
+    <!-- Breadcrumb Area -->
+    <section class="breadcrumb-area d-flex align-items-center position-relative bg-img-center"
+        style="background-image: url('../assets/img/bg/hero-bg-4.jpg');">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="breadcrumb-content text-center">
+                        <h1 class="big-text">Bookings</h1>
+                        <h3>Đặt phòng của tôi</h3>
+                        <ul class="breadcrumb-content list-inline">
+                            <li><a href="index.html">Home</a></li>
+                            <li><i class="far fa-angle-right"></i></li>
+                            <li>My Bookings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-center">
+                            <h1>Đặt phòng của tôi</h1>
+                            <p>Quản lý và theo dõi tất cả các đặt phòng của bạn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Filters -->
+                <div class="row mb-4">
+                    <div class="col-lg-12">
+                        <div class="booking-filters bg-light p-3 rounded">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <select class="form-control" id="statusFilter">
+                                        <option value="">Tất cả trạng thái</option>
+                                        <option value="pending">Chờ xác nhận</option>
+                                        <option value="confirmed">Đã xác nhận</option>
+                                        <option value="checkedin">Đã nhận phòng</option>
+                                        <option value="completed">Hoàn thành</option>
+                                        <option value="cancelled">Đã hủy</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" id="dateFilter" placeholder="Lọc theo ngày">
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary" onclick="filterBookings()">
+                                        <i class="fas fa-filter"></i> Lọc
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="clearFilters()">
+                                        <i class="fas fa-times"></i> Xóa
+                                    </button>
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <button class="btn filled-btn" onclick="showBookingModal()">
+                                        <i class="fas fa-plus"></i> Đặt phòng mới
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bookings List -->
+                <div class="row" id="bookings-container">
+                    <!-- Bookings will be loaded here by JavaScript -->
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Đang tải...</span>
+                        </div>
+                        <p class="mt-2">Đang tải danh sách đặt phòng...</p>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="row d-none" id="empty-state">
+                    <div class="col-12 text-center py-5">
+                        <div class="empty-bookings">
+                            <i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>
+                            <h4>Chưa có đặt phòng nào</h4>
+                            <p class="text-muted">Bạn chưa có đặt phòng nào. Hãy đặt phòng đầu tiên của bạn!</p>
+                            <button class="btn filled-btn mt-3" onclick="showBookingModal()">
+                                <i class="fas fa-plus"></i> Đặt phòng ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Start -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <div class="footer-logo">
+                                <img src="../assets/img/logo.png" alt="Logo">
+                            </div>
+                            <p>Khách sạn chất lượng cao với dịch vụ tuyệt vời và giá cả hợp lý.</p>
+                            <ul class="social-icons">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <h4 class="widget-title">Quick Links</h4>
+                            <ul class="nav-widget clearfix">
+                                <li><a href="index.html">Trang chủ</a></li>
+                                <li><a href="room.html">Phòng</a></li>
+                                <li><a href="about.html">Giới thiệu</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Liên hệ</a></li>
+                                <li><a href="my-bookings.html">Đặt phòng của tôi</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget footer-widget">
+                            <h4 class="widget-title">Liên hệ</h4>
+                            <ul class="contact-info-widget">
+                                <li><i class="far fa-envelope"></i>Hotelbooking@email.com</li>
+                                <li><i class="far fa-phone"></i>+89 (456) 789 999</li>
+                                <li><i class="far fa-map-marker-alt"></i>123 Đường ABC, Quận XYZ, TP.HCM</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="#" class="back-to-top"><i class="far fa-angle-up"></i></a>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="footer-nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="room.html">Rooms</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="copy-right text-right">Copyright ©2024. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- modernizr version 3.6.0 -->
+    <script src="../assets/js/modernizr-3.6.0.min.js"></script>
+    <!-- jQuery Version 1.12.4 -->
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <!-- Proper Version 1.16.0-->
+    <script src="../assets/js/popper.min-1.16.0.js"></script>
+    <!-- Bootstrap Version 4.4.1 -->
+    <script src="../assets/js/bootstrap-4.4.1.min.js"></script>
+    <!-- Slick Version 1.9.0 -->
+    <script src="../assets/js/slick.min-1.9.0.js"></script>
+    <!-- isotope version 3.0.6 -->
+    <script src="../assets/js/isotope.pkgd-3.0.6.min.js"></script>
+    <!-- MeanMenu version 2.0.7-->
+    <script src="../assets/js/meanmenu-2.0.7.min.js"></script>
+    <!-- Nice select js version 1.0 -->
+    <script src="../assets/js/jquery.nice-select-1.0.min.js"></script>
+    <!-- wow js version 1.1.3-->
+    <script src="../assets/js/wow-1.1.3.min.js"></script>
+    <!-- magnific popup version 1.1.0 -->
+    <script src="../assets/js/magnific-popup-1.1.0.min.js"></script>
+    <!-- jQuery inview  -->
+    <script src="../assets/js/jquery.inview.min.js"></script>
+    <!-- Waypoints js version 2.0.3 -->
+    <script src="../assets/js/waypoints-2.0.3.min.js"></script>
+    <!-- counterup js version 1.0 -->
+    <script src="../assets/js/jquery.counterup-1.0.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="../assets/js/bootstrap-datepicker.js"></script>
+    <!-- jQuery Ui for price range slide -->
+    <script src="../assets/js/jquery-ui.min.js"></script>
+    <!-- Main JS file -->
+    <script src="../assets/js/main.js"></script>
+    <!-- API Integration Scripts -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/header-manager.js"></script>
+    <script src="../assets/js/booking.js"></script>
+    <script src="../assets/js/my-bookings.js"></script>
+</body>
+
+</html>

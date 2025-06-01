@@ -55,12 +55,16 @@
                                 <img src="../assets/img/logo-transparent.png" alt="Image" width="160" height="34">
                             </div>
                             <hr>
-                            <form action="" method="POST">
+
+                            <!-- Alert container for messages -->
+                            <div id="alert-container"></div>
+
+                            <form id="registerForm" method="POST">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-control-input">
                                             <div class="input-wrap">
-                                                <input type="text" placeholder="Your Full Name" id="name">
+                                                <input type="text" placeholder="First Name" name="firstName" required>
                                                 <i class="far fa-user-alt"></i>
                                             </div>
                                         </div>
@@ -68,7 +72,15 @@
                                     <div class="col-12">
                                         <div class="form-control-input">
                                             <div class="input-wrap">
-                                                <input type="text" placeholder="Your Email" id="email">
+                                                <input type="text" placeholder="Last Name" name="lastName" required>
+                                                <i class="far fa-user-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-control-input">
+                                            <div class="input-wrap">
+                                                <input type="email" placeholder="Your Email" name="email" required>
                                                 <i class="far fa-envelope"></i>
                                             </div>
                                         </div>
@@ -76,7 +88,7 @@
                                     <div class="col-12">
                                         <div class="form-control-input">
                                             <div class="input-wrap">
-                                                <input type="text" placeholder="Your Phone" id="phone">
+                                                <input type="text" placeholder="Your Phone" name="phone">
                                                 <i class="fa fa-phone"></i>
                                             </div>
                                         </div>
@@ -84,7 +96,7 @@
                                     <div class="col-12">
                                         <div class="form-control-input">
                                             <div class="input-wrap">
-                                                <input type="password" placeholder="Password" id="password">
+                                                <input type="password" placeholder="Password" name="password" required>
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
@@ -93,7 +105,7 @@
                                         <div class="form-control-input">
                                             <div class="input-wrap">
                                                 <input type="password" placeholder="Confirm Password"
-                                                    id="password_confirmation">
+                                                    name="confirmPassword" required>
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
@@ -148,7 +160,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
     <!-- Main JS file -->
     <script src="../assets/js/main.js"></script>
-</body>
 
+    <!-- API Integration Scripts -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+</body>
 
 </html>

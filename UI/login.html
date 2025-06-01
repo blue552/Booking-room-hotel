@@ -32,6 +32,41 @@
     <link rel="stylesheet" href="../assets/css/responsive.css" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <style>
+        .alert {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+        }
+
+        .alert-success {
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            color: #3c763d;
+        }
+
+        .alert .close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            line-height: 1;
+            color: inherit;
+            opacity: 0.7;
+            cursor: pointer;
+            float: right;
+        }
+
+        .alert .close:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -57,12 +92,15 @@
                                 <img src="../assets/img/logo-transparent.png" alt="Image" width="160" height="34">
                             </div>
                             <hr>
-                            <form action="" method="POST">
+                            <!-- Alert container for messages -->
+                            <div id="alert-container"></div>
+
+                            <form action="" method="POST" id="loginForm">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-control-input">
                                             <div class="input-wrap">
-                                                <input type="text" placeholder="Your Email" id="email">
+                                                <input type="email" placeholder="Your Email" name="email" required>
                                                 <i class="far fa-envelope"></i>
                                             </div>
                                         </div>
@@ -70,7 +108,7 @@
                                     <div class="col-12">
                                         <div class="form-control-input">
                                             <div class="input-wrap">
-                                                <input type="password" placeholder="Password" id="password">
+                                                <input type="password" placeholder="Password" name="password" required>
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
@@ -88,8 +126,8 @@
                                 </div>
                             </form>
                             <p class="small">
-                                <a href="#" class="small-text">Forgot password!</a>
-                                <a href="UI/register.html" class="small-text float-right">I don't have account!</a>
+                                <a href="send-reset-password.html" class="small-text">Forgot password!</a>
+                                <a href="register.html" class="small-text float-right">I don't have account!</a>
                             </p>
                             <div class="divider"><span>Or</span></div>
                             <div class="social-login">
@@ -144,12 +182,81 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
     <!-- Main JS file -->
     <script src="../assets/js/main.js"></script>
+
+    <!-- API and Auth Scripts -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
     <script>
+        // Override showError and showSuccess functions to show in specific container
+        function showError(message) {
+            const container = document.getElementById('alert-container');
+
+            // Remove existing error messages
+            const existingErrors = container.querySelectorAll('.alert-danger');
+            existingErrors.forEach(error => error.remove());
+
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-danger';
+            errorDiv.innerHTML = `
+                <i class="fas fa-exclamation-circle"></i>
+                ${message}
+                <button type="button" class="close" onclick="this.parentElement.remove()">
+                    <span>&times;</span>
+                </button>
+            `;
+
+            container.appendChild(errorDiv);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (errorDiv.parentElement) {
+                    errorDiv.remove();
+                }
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const container = document.getElementById('alert-container');
+
+            // Remove existing success messages
+            const existingSuccess = container.querySelectorAll('.alert-success');
+            existingSuccess.forEach(success => success.remove());
+
+            const successDiv = document.createElement('div');
+            successDiv.className = 'alert alert-success';
+            successDiv.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                ${message}
+                <button type="button" class="close" onclick="this.parentElement.remove()">
+                    <span>&times;</span>
+                </button>
+            `;
+
+            container.appendChild(successDiv);
+
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (successDiv.parentElement) {
+                    successDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', function () {
+            if (api.isAuthenticated()) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirect = urlParams.get('redirect') || 'index.html';
+                window.location.href = redirect;
+            }
+        });
+
         // Google Sign-In
         function handleGoogleCredentialResponse(response) {
             console.log("Google Access token:", response.access_token);
             // Gửi token đến server nếu cần
-            // fetch("http://localhost:5500/auth/google", {
+            // fetch("http://localhost:3000/auth/google", {
             //     method: "POST",
             //     headers: { "Content-Type": "application/json" },
             //     body: JSON.stringify({ token: response.access_token })
@@ -171,7 +278,7 @@
                     console.log("Google button clicked");
                     google.accounts.oauth2
                         .initTokenClient({
-                            client_id: "421107612665-k0blo4jku4djiumarqnajoqdccflt7h2.apps.googleusercontent.com", // Thêm client_id
+                            client_id: "421107612665-k0blo4jku4djiumarqnajoqdccflt7h2.apps.googleusercontent.com",
                             scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
                             callback: handleGoogleCredentialResponse,
                         })
@@ -206,6 +313,5 @@
             );
         });
     </script>
-
 
 </html>
