@@ -1,0 +1,28 @@
+const sequelize = require('../config/database');    // Import Sequelize connection
+const path = require('path');                       // Module xử lý đường dẫn
+const fs = require('fs');                          // Module đọc/ghi file
+
+async function runMigrations() {
+    try {
+        // STEP 1: Đọc tất cả migration files
+        const migrationsPath = path.join(__dirname, '../migrations'); // Đường dẫn thư mục migrations
+        const migrationFiles = fs.readdirSync(migrationsPath)         // Đọc tất cả files trong thư mục
+            .filter(file => file.endsWith('.js'))                    // Chỉ lấy file .js
+            .sort();                                                  // Sắp xếp theo tên (timestamp)
+
+        // STEP 2: Chạy từng migration theo thứ tự
+        for (const file of migrationFiles) {
+            console.log(`Running migration: ${file}`);               // Log migration đang chạy
+            const migration = require(path.join(migrationsPath, file)); // Import migration module
+            await migration.up(sequelize.queryInterface, sequelize); // Chạy method up() của migration
+        }
+
+        console.log('All migrations completed successfully');        // Log thành công
+        process.exit(0);                                            // Exit với code 0 (thành công)
+    } catch (error) {
+        console.error('Migration failed:', error);                  // Log lỗi
+        process.exit(1);                                            // Exit với code 1 (lỗi)
+    }
+}
+
+runMigrations();                                                    // Gọi function để chạy

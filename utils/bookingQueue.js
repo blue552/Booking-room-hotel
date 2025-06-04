@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 const { Booking, Room } = require('../models');
-const RedisLock = require('./redisLock');
+const BookingLock = require('./bookingLock');
 
 class BookingQueue {
     static async initialize() {
@@ -31,7 +31,7 @@ class BookingQueue {
         const { roomId, checkIn, checkOut, userId, guests, specialRequests } = bookingData;
 
         // Try to acquire lock
-        const lockAcquired = await RedisLock.acquireLock(roomId, checkIn, checkOut, userId);
+        const lockAcquired = await BookingLock.acquireLock(roomId, checkIn, checkOut, userId);
         if (!lockAcquired) {
             throw new Error('Room is currently being booked by another user');
         }
@@ -65,7 +65,7 @@ class BookingQueue {
 
         } finally {
             // Always release the lock
-            await RedisLock.releaseLock(roomId, checkIn, checkOut, userId);
+            await BookingLock.releaseLock(roomId, checkIn, checkOut, userId);
         }
     }
 

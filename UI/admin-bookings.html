@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quản lý đặt phòng</title>
+    <!-- Font Awesome Css -->
+    <link rel="stylesheet" href="../assets/css/all.min.css">
+    <!-- Bootstrap version 4.4.1 -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-4.4.1.min.css" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <style>
+        .admin-header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+        }
+
+        .booking-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .status-badge {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .status-pending {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .status-confirmed {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-cancelled {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status-completed {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-action {
+            margin: 0 3px;
+            font-size: 0.85rem;
+        }
+
+        .booking-info {
+            font-size: 0.9rem;
+        }
+
+        .booking-dates {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .guest-info {
+            background: #e9ecef;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+
+        .filter-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3><i class="fas fa-calendar-check"></i> Quản lý đặt phòng</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-info" onclick="loadBookings()">
+                        <i class="fas fa-sync-alt"></i> Tải lại
+                    </button>
+                    <a href="admin-rooms.html" class="btn btn-secondary ml-2">
+                        <i class="fas fa-bed"></i> Quản lý phòng
+                    </a>
+                    <a href="index.html" class="btn btn-secondary ml-2">
+                        <i class="fas fa-home"></i> Trang chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Statistics -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="totalBookings">0</div>
+                    <div>Tổng đặt phòng</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="stats-number" id="pendingBookings">0</div>
+                    <div>Đang chờ</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="stats-number" id="confirmedBookings">0</div>
+                    <div>Đã xác nhận</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <div class="stats-number" id="completedBookings">0</div>
+                    <div>Hoàn thành</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-control" id="statusFilter">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="pending">Đang chờ</option>
+                        <option value="confirmed">Đã xác nhận</option>
+                        <option value="cancelled">Đã hủy</option>
+                        <option value="completed">Hoàn thành</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" class="form-control" id="dateFilter" placeholder="Ngày check-in">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="searchBooking"
+                        placeholder="Tìm theo ID booking, phòng, khách hàng...">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-block" onclick="filterBookings()">
+                        <i class="fas fa-search"></i> Lọc
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center py-5">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+            <p class="mt-2">Đang tải danh sách đặt phòng...</p>
+        </div>
+
+        <!-- No Bookings State -->
+        <div id="noBookingsState" class="text-center py-5" style="display: none;">
+            <i class="fas fa-calendar-times fa-3x text-muted"></i>
+            <h4 class="mt-3">Không có đặt phòng nào</h4>
+            <p class="text-muted">Chưa có đặt phòng nào trong hệ thống hoặc không phù hợp với bộ lọc.</p>
+        </div>
+
+        <!-- Bookings List -->
+        <div id="bookingsContainer" style="display: none;">
+            <!-- Bookings will be loaded here -->
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Booking pagination" id="paginationContainer" style="display: none;">
+            <ul class="pagination justify-content-center" id="pagination">
+                <!-- Pagination will be generated here -->
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Status Update Modal -->
+    <div class="modal fade" id="statusModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cập nhật trạng thái đặt phòng</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="updateBookingId">
+                    <div class="form-group">
+                        <label for="newStatus">Trạng thái mới:</label>
+                        <select class="form-control" id="newStatus">
+                            <option value="pending">Đang chờ</option>
+                            <option value="confirmed">Đã xác nhận</option>
+                            <option value="cancelled">Đã hủy</option>
+                            <option value="completed">Hoàn thành</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="statusNote">Ghi chú (tùy chọn):</label>
+                        <textarea class="form-control" id="statusNote" rows="3"
+                            placeholder="Lý do thay đổi trạng thái..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="updateBookingStatus()">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap-4.4.1.min.js"></script>
+
+    <script>
+        // API Configuration
+        const API_BASE = 'http://localhost:3001'; // Booking service port
+
+        let currentPage = 1;
+        let bookingsPerPage = 5;
+        let allBookings = [];
+        let filteredBookings = [];
+
+        // Load bookings on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadBookings();
+        });
+
+        // Load all bookings
+        async function loadBookings() {
+            try {
+                showLoading(true);
+
+                // Try to fetch from real API first
+                const response = await fetch(`${API_BASE}/api/admin/bookings`, {
+                    headers: {
+                        'Authorization': 'Bearer admin_token'
+                    }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success && result.data) {
+                        allBookings = result.data;
+                        filteredBookings = [...allBookings];
+
+                        showLoading(false);
+                        updateStatistics();
+                        displayBookings();
+
+                        console.log(`✅ Loaded ${allBookings.length} real bookings from API`);
+                        return;
+                    }
+                }
+
+                // If API fails, try alternative endpoint
+                const alternativeResponse = await fetch(`${API_BASE}/bookings`, {
+                    headers: {
+                        'Authorization': 'Bearer admin_token'
+                    }
+                });
+
+                if (alternativeResponse.ok) {
+                    const alternativeResult = await alternativeResponse.json();
+                    if (alternativeResult.success && alternativeResult.data) {
+                        allBookings = alternativeResult.data;
+                        filteredBookings = [...allBookings];
+
+                        showLoading(false);
+                        updateStatistics();
+                        displayBookings();
+
+                        console.log(`✅ Loaded ${allBookings.length} bookings from alternative endpoint`);
+                        return;
+                    }
+                }
+
+                throw new Error('Failed to fetch bookings from all endpoints');
+
+            } catch (error) {
+                console.error('Error loading bookings:', error);
+                console.log('📋 No real data available, showing sample data for demo');
+
+                showLoading(false);
+                showMessage('⚠️ Không thể kết nối tới server. Hiển thị dữ liệu mẫu.', 'warning');
+
+                // Show sample data with clear indication
+                createSampleBookings();
+            }
+        }
+
+        // Create sample bookings for demo
+        function createSampleBookings() {
+            allBookings = [
+                {
+                    id: 1,
+                    roomId: 101,
+                    userId: 1,
+                    checkIn: '2024-01-15',
+                    checkOut: '2024-01-17',
+                    totalPrice: 1600000,
+                    status: 'pending',
+                    numberOfGuests: 2,
+                    specialRequests: 'Tầng cao, view đẹp',
+                    user: { name: 'Nguyễn Văn A', email: 'nguyenvana@email.com', phone: '0901234567' },
+                    room: { roomNumber: '101', roomType: 'Double', price: 800000 },
+                    createdAt: '2024-01-10T10:00:00Z'
+                },
+                {
+                    id: 2,
+                    roomId: 201,
+                    userId: 2,
+                    checkIn: '2024-01-20',
+                    checkOut: '2024-01-22',
+                    totalPrice: 5000000,
+                    status: 'confirmed',
+                    numberOfGuests: 4,
+                    specialRequests: 'Phòng Suite với dịch vụ Butler',
+                    user: { name: 'Trần Thị B', email: 'tranthib@email.com', phone: '0902345678' },
+                    room: { roomNumber: '201', roomType: 'Suite', price: 2500000 },
+                    createdAt: '2024-01-12T14:30:00Z'
+                },
+                {
+                    id: 3,
+                    roomId: 301,
+                    userId: 3,
+                    checkIn: '2024-01-18',
+                    checkOut: '2024-01-19',
+                    totalPrice: 1800000,
+                    status: 'completed',
+                    numberOfGuests: 2,
+                    specialRequests: '',
+                    user: { name: 'Lê Văn C', email: 'levanc@email.com', phone: '0903456789' },
+                    room: { roomNumber: '301', roomType: 'Deluxe', price: 1800000 },
+                    createdAt: '2024-01-16T09:15:00Z'
+                }
+            ];
+
+            filteredBookings = [...allBookings];
+            showLoading(false);
+            updateStatistics();
+            displayBookings();
+        }
+
+        // Show/hide loading state
+        function showLoading(show) {
+            document.getElementById('loadingState').style.display = show ? 'block' : 'none';
+            document.getElementById('bookingsContainer').style.display = show ? 'none' : 'block';
+            document.getElementById('paginationContainer').style.display = show ? 'none' : 'block';
+        }
+
+        // Show/hide no bookings state
+        function showNoBookings(show) {
+            document.getElementById('noBookingsState').style.display = show ? 'block' : 'none';
+            document.getElementById('bookingsContainer').style.display = show ? 'none' : 'block';
+            document.getElementById('paginationContainer').style.display = show ? 'none' : 'block';
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            const stats = {
+                total: allBookings.length,
+                pending: allBookings.filter(b => b.status === 'pending').length,
+                confirmed: allBookings.filter(b => b.status === 'confirmed').length,
+                completed: allBookings.filter(b => b.status === 'completed').length
+            };
+
+            document.getElementById('totalBookings').textContent = stats.total;
+            document.getElementById('pendingBookings').textContent = stats.pending;
+            document.getElementById('confirmedBookings').textContent = stats.confirmed;
+            document.getElementById('completedBookings').textContent = stats.completed;
+        }
+
+        // Display bookings with pagination
+        function displayBookings() {
+            const container = document.getElementById('bookingsContainer');
+
+            if (filteredBookings.length === 0) {
+                showNoBookings(true);
+                return;
+            }
+
+            showNoBookings(false);
+
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredBookings.length / bookingsPerPage);
+            const startIndex = (currentPage - 1) * bookingsPerPage;
+            const endIndex = startIndex + bookingsPerPage;
+            const bookingsToShow = filteredBookings.slice(startIndex, endIndex);
+
+            // Generate bookings HTML
+            container.innerHTML = bookingsToShow.map(booking => createBookingHTML(booking)).join('');
+
+            // Update pagination
+            updatePagination(totalPages);
+        }
+
+        // Create HTML for a single booking
+        function createBookingHTML(booking) {
+            const statusClass = getStatusClass(booking.status);
+            const statusText = getStatusText(booking.status);
+            const nights = Math.ceil((new Date(booking.checkOut) - new Date(booking.checkIn)) / (1000 * 60 * 60 * 24));
+
+            return `
+                <div class="booking-card">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5>Booking #${booking.id}</h5>
+                                <span class="badge status-badge ${statusClass}">${statusText}</span>
+                            </div>
+                            
+                            <div class="booking-info">
+                                <div class="guest-info">
+                                    <strong><i class="fas fa-user"></i> Khách hàng:</strong> ${booking.user?.name || 'N/A'}<br>
+                                    <strong><i class="fas fa-envelope"></i> Email:</strong> ${booking.user?.email || 'N/A'}<br>
+                                    <strong><i class="fas fa-phone"></i> SĐT:</strong> ${booking.user?.phone || 'N/A'}
+                                </div>
+                                
+                                <div class="booking-dates">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-bed"></i> Phòng:</strong> ${booking.room?.roomNumber || booking.roomId} (${booking.room?.roomType || 'N/A'})<br>
+                                            <strong><i class="fas fa-users"></i> Số khách:</strong> ${booking.numberOfGuests} người
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-calendar-check"></i> Check-in:</strong> ${formatDate(booking.checkIn)}<br>
+                                            <strong><i class="fas fa-calendar-times"></i> Check-out:</strong> ${formatDate(booking.checkOut)}<br>
+                                            <strong><i class="fas fa-moon"></i> Số đêm:</strong> ${nights} đêm
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                ${booking.specialRequests ? `
+                                    <div class="mt-2">
+                                        <strong><i class="fas fa-sticky-note"></i> Yêu cầu đặc biệt:</strong><br>
+                                        <em>${booking.specialRequests}</em>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-right">
+                            <div class="mb-3">
+                                <h4 class="text-primary">${formatPrice(booking.totalPrice)} VNĐ</h4>
+                                <small class="text-muted">Tổng tiền</small>
+                            </div>
+                            
+                            <div class="mb-2">
+                                <small class="text-muted">Đặt lúc: ${formatDateTime(booking.createdAt)}</small>
+                            </div>
+                            
+                            <div class="btn-group-vertical">
+                                <button class="btn btn-sm btn-warning btn-action" onclick="showStatusModal(${booking.id}, '${booking.status}')">
+                                    <i class="fas fa-edit"></i> Đổi trạng thái
+                                </button>
+                                <button class="btn btn-sm btn-info btn-action" onclick="viewBookingDetails(${booking.id})">
+                                    <i class="fas fa-eye"></i> Chi tiết
+                                </button>
+                                ${booking.status === 'pending' ? `
+                                    <button class="btn btn-sm btn-success btn-action" onclick="quickConfirm(${booking.id})">
+                                        <i class="fas fa-check"></i> Xác nhận nhanh
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-action" onclick="quickCancel(${booking.id})">
+                                        <i class="fas fa-times"></i> Hủy
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Helper functions
+        function getStatusClass(status) {
+            return `status-${status}`;
+        }
+
+        function getStatusText(status) {
+            switch (status) {
+                case 'pending': return 'Đang chờ';
+                case 'confirmed': return 'Đã xác nhận';
+                case 'cancelled': return 'Đã hủy';
+                case 'completed': return 'Hoàn thành';
+                default: return 'Không xác định';
+            }
+        }
+
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN').format(price);
+        }
+
+        function formatDate(dateStr) {
+            return new Date(dateStr).toLocaleDateString('vi-VN');
+        }
+
+        function formatDateTime(dateStr) {
+            return new Date(dateStr).toLocaleString('vi-VN');
+        }
+
+        // Show status update modal
+        function showStatusModal(bookingId, currentStatus) {
+            document.getElementById('updateBookingId').value = bookingId;
+            document.getElementById('newStatus').value = currentStatus;
+            document.getElementById('statusNote').value = '';
+            $('#statusModal').modal('show');
+        }
+
+        // Update booking status
+        async function updateBookingStatus() {
+            const bookingId = document.getElementById('updateBookingId').value;
+            const newStatus = document.getElementById('newStatus').value;
+            const note = document.getElementById('statusNote').value;
+
+            try {
+                // In real app, call API to update status
+                // const response = await fetch(`${API_BASE}/admin/bookings/${bookingId}/status`, {
+                //     method: 'PUT',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'Authorization': 'Bearer admin_token'
+                //     },
+                //     body: JSON.stringify({ status: newStatus, note })
+                // });
+
+                // For demo, update locally
+                const booking = allBookings.find(b => b.id == bookingId);
+                if (booking) {
+                    booking.status = newStatus;
+                    booking.statusNote = note;
+                    booking.updatedAt = new Date().toISOString();
+                }
+
+                $('#statusModal').modal('hide');
+                alert(`Cập nhật trạng thái thành công!`);
+
+                updateStatistics();
+                displayBookings();
+
+            } catch (error) {
+                console.error('Error updating status:', error);
+                alert('Lỗi khi cập nhật trạng thái');
+            }
+        }
+
+        // Quick confirm booking
+        async function quickConfirm(bookingId) {
+            if (confirm('Xác nhận đặt phòng này?')) {
+                const booking = allBookings.find(b => b.id == bookingId);
+                if (booking) {
+                    booking.status = 'confirmed';
+                    booking.updatedAt = new Date().toISOString();
+                }
+
+                alert('Xác nhận đặt phòng thành công!');
+                updateStatistics();
+                displayBookings();
+            }
+        }
+
+        // Quick cancel booking
+        async function quickCancel(bookingId) {
+            if (confirm('Hủy đặt phòng này?')) {
+                const booking = allBookings.find(b => b.id == bookingId);
+                if (booking) {
+                    booking.status = 'cancelled';
+                    booking.updatedAt = new Date().toISOString();
+                }
+
+                alert('Hủy đặt phòng thành công!');
+                updateStatistics();
+                displayBookings();
+            }
+        }
+
+        // View booking details
+        function viewBookingDetails(bookingId) {
+            const booking = allBookings.find(b => b.id == bookingId);
+            if (booking) {
+                const details = `
+                    Booking ID: ${booking.id}
+                    Phòng: ${booking.room?.roomNumber} (${booking.room?.roomType})
+                    Khách hàng: ${booking.user?.name}
+                    Check-in: ${formatDate(booking.checkIn)}
+                    Check-out: ${formatDate(booking.checkOut)}
+                    Số khách: ${booking.numberOfGuests}
+                    Tổng tiền: ${formatPrice(booking.totalPrice)} VNĐ
+                    Trạng thái: ${getStatusText(booking.status)}
+                    ${booking.specialRequests ? `Yêu cầu: ${booking.specialRequests}` : ''}
+                `;
+                alert(details);
+            }
+        }
+
+        // Filter bookings
+        function filterBookings() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            const searchQuery = document.getElementById('searchBooking').value.toLowerCase();
+
+            filteredBookings = allBookings.filter(booking => {
+                const matchStatus = !statusFilter || booking.status === statusFilter;
+                const matchDate = !dateFilter || booking.checkIn.includes(dateFilter);
+                const matchSearch = !searchQuery ||
+                    booking.id.toString().includes(searchQuery) ||
+                    booking.room?.roomNumber.toLowerCase().includes(searchQuery) ||
+                    booking.user?.name.toLowerCase().includes(searchQuery) ||
+                    booking.user?.email.toLowerCase().includes(searchQuery);
+
+                return matchStatus && matchDate && matchSearch;
+            });
+
+            currentPage = 1;
+            displayBookings();
+        }
+
+        // Pagination
+        function updatePagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+
+            if (totalPages <= 1) {
+                document.getElementById('paginationContainer').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('paginationContainer').style.display = 'block';
+
+            let paginationHTML = '';
+
+            // Previous button
+            if (currentPage > 1) {
+                paginationHTML += `<li class="page-item">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Trước</a>
+                </li>`;
+            }
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<li class="page-item active">
+                        <span class="page-link">${i}</span>
+                    </li>`;
+                } else {
+                    paginationHTML += `<li class="page-item">
+                        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                    </li>`;
+                }
+            }
+
+            // Next button
+            if (currentPage < totalPages) {
+                paginationHTML += `<li class="page-item">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Sau</a>
+                </li>`;
+            }
+
+            pagination.innerHTML = paginationHTML;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            displayBookings();
+            window.scrollTo(0, 0);
+        }
+
+        // Show message to user
+        function showMessage(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            `;
+
+            const container = document.querySelector('.container');
+            container.insertBefore(alertDiv, container.firstChild);
+
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+
+</html>

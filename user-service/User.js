@@ -22,11 +22,13 @@ const User = sequelize.define('User', {
     },
     firstName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'first_name'
     },
     lastName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'last_name'
     },
     phone: {
         type: DataTypes.STRING,
@@ -38,9 +40,12 @@ const User = sequelize.define('User', {
     },
     isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
+        field: 'is_verified'
     }
 }, {
+    tableName: 'Users',
+    underscored: true,
     hooks: {
         beforeCreate: async (user) => {
             if (user.password) {

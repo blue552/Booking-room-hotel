@@ -1,0 +1,144 @@
+// === XỬ LÝ SỰ KIỆN CHÍNH ===
+
+// 1. Sự kiện DOM Content Loaded
+document.addEventListener('DOMContentLoaded', function () {
+    // Kiểm tra authentication
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.href);
+        return;
+    }
+    initializeMyBookingsPage();
+});
+
+// 2. Sự kiện Filter
+function setupEventListeners() {
+    // Filter theo status
+    const statusFilter = document.getElementById('statusFilter');
+    if (statusFilter) {
+        statusFilter.addEventListener('change', filterBookings);
+    }
+
+    // Filter theo date
+    const dateFilter = document.getElementById('dateFilter');
+    if (dateFilter) {
+        dateFilter.addEventListener('change', filterBookings);
+    }
+}
+
+// 3. Sự kiện Button Click
+// - viewBookingDetails(bookingId) - Xem chi tiết booking
+// - cancelBooking(bookingId) - Hủy booking với confirm
+// - modifyBooking(bookingId) - Sửa đổi booking
+// - submitModifyBooking() - Submit form sửa đổi
+
+// 4. Sự kiện Modal
+// - Bootstrap modal show/hide events
+// - Form submission trong modal
+// === XỬ LÝ SỰ KIỆN CHÍNH ===
+
+// 1. Sự kiện DOM Content Loaded
+document.addEventListener('DOMContentLoaded', async function () {
+    // Chỉ load rooms trên các trang liên quan
+    if (window.location.pathname.includes('room') ||
+        window.location.pathname.includes('index')) {
+        
+        const rooms = await loadRooms();
+        window.allRoomsData = rooms;
+        initializeRoomFilters();
+    }
+});
+
+// 2. Sự kiện Filter & Search
+function initializeRoomFilters() {
+    // Filter theo loại phòng
+    const typeFilter = document.getElementById('roomTypeFilter');
+    if (typeFilter) {
+        typeFilter.addEventListener('change', (e) => {
+            const currentFilters = getCurrentFilters();
+            currentFilters.type = e.target.value || null;
+            filterRooms(currentFilters);
+        });
+    }
+
+    // Filter theo trạng thái
+    const statusFilter = document.getElementById('roomStatusFilter');
+    if (statusFilter) {
+        statusFilter.addEventListener('change', (e) => {
+            const currentFilters = getCurrentFilters();
+            currentFilters.status = e.target.value || null;
+            filterRooms(currentFilters);
+        });
+    }
+
+    // Search input với debounce
+    const searchInput = document.getElementById('roomSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const currentFilters = getCurrentFilters();
+            currentFilters.search = e.target.value;
+            filterRooms(currentFilters);
+        });
+    }
+}
+
+// 3. Sự kiện Button Click
+// - viewRoomDetails(roomId) - Xem chi tiết phòng
+// - bookRoom(roomId) - Đặt phòng (kiểm tra auth trước)
+
+// 4. Sự kiện Image Error
+// - onerror trong img tag để fallback default image
+// === XỬ LÝ SỰ KIỆN CHÍNH ===
+
+// 1. Sự kiện DOM Content Loaded
+document.addEventListener('DOMContentLoaded', function () {
+    updateAuthUI();
+
+    // Tìm và bind form login
+    const loginForm = document.querySelector('#loginForm, form[action*="login"]');
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+
+    // Tìm và bind form register
+    const registerForm = document.querySelector('#registerForm, form[action*="register"]');
+    if (registerForm) {
+        registerForm.addEventListener('submit', handleRegister);
+    }
+
+    // Bind logout links
+    const logoutLinks = document.querySelectorAll('.logout-link, [data-action="logout"]');
+    logoutLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            handleLogout();
+        });
+    });
+});
+
+// 2. Sự kiện Form Submit
+async function handleLogin(event) {
+    event.preventDefault(); // Ngăn form submit mặc định
+    
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    // Validate & submit
+    // ...
+}
+
+async function handleRegister(event) {
+    event.preventDefault(); // Ngăn form submit mặc định
+    
+    // Validate & submit
+    // ...
+}
+
+// 3. Sự kiện Click
+function handleLogout() {
+    if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+        UserAPI.logout();
+    }
+}
+
+// 4. Sự kiện Auto-remove Alert
+// - setTimeout để tự động remove alert sau 3-5 giây

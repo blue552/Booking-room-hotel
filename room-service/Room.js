@@ -19,6 +19,10 @@ const Room = sequelize.define('Room', {
         type: DataTypes.ENUM('available', 'occupied', 'maintenance'),
         defaultValue: 'available'
     },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
     amenities: {
         type: DataTypes.JSONB,
         defaultValue: {}

@@ -39,6 +39,37 @@ const Booking = sequelize.define('Booking', {
     numberOfGuests: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    // New admin management fields
+    adminNote: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        comment: 'Admin notes about status changes'
+    },
+    statusUpdatedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        comment: 'When status was last updated'
+    },
+    statusUpdatedBy: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        comment: 'Admin ID who updated status'
+    },
+    autoConfirm: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        comment: 'Whether booking should be auto-confirmed'
+    },
+    paymentStatus: {
+        type: DataTypes.ENUM('pending', 'paid', 'failed', 'refunded'),
+        defaultValue: 'pending',
+        comment: 'Payment status'
+    },
+    paymentMethod: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+        comment: 'Payment method used'
     }
 });
 

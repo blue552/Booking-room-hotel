@@ -1,0 +1,76 @@
+2025/06/02 17:10:19 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:20 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:21 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:22 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:23 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:25 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:28 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:35 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:10:48 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:11:14 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:12:05 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:13:05 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:14:06 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:15:06 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:16:06 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:17:06 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:18:07 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:19:07 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:20:07 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:21:07 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:22:08 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:23:08 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:24:08 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:25:08 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:26:08 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:27:09 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:28:09 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:29:09 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:30:09 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:31:09 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:32:10 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:33:10 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:34:10 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/02 17:35:10 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:32:47 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:32:48 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:32:49 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:32:50 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:32:51 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:32:53 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:32:56 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:33:03 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:33:16 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:33:42 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:33:56 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:33:57 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:33:58 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:33:59 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:34:00 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:34:02 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:34:05 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:34:12 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:34:25 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 08:34:51 [emerg] 1#1: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /etc/nginx/nginx.conf:105
+2025/06/03 17:24:31 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:24:39 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:24:48 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:24:56 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:25:04 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:25:12 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:25:21 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:25:33 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:25:51 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:26:22 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:27:18 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:28:23 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:29:29 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:30:34 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:36:03 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:36:11 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:36:19 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:36:28 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:36:36 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:36:44 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:36:53 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20
+2025/06/03 17:37:04 [emerg] 1#1: host not found in upstream "frontend_server:8080" in /etc/nginx/nginx.conf:20

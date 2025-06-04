@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Author: Nguyễn Đức Bảo- Date: 6-6-2024 -->
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Room Page</title>
+    <!-- Font Awesome Css -->
+    <link rel="stylesheet" href="../assets/css/all.min.css">
+    <!-- Bootstrap version 4.4.1 -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-4.4.1.min.css" />
+    <!-- animate css -->
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <!-- magnific popup versison 1.1.0 -->
+    <link rel="stylesheet" href="../assets/css/magnific-popup-1.1.0.css">
+    <!-- Nice Select  -->
+    <link rel="stylesheet" href="../assets/css/nice-select-1.0.css">
+    <!-- meanmenu version 2.0.7 -->
+    <link rel="stylesheet" href="../assets/css/meanmenu-2.0.7.min.css">
+    <!-- Slick Version 1.9.0 -->
+    <link rel="stylesheet" href="../assets/css/slick-1.9.0.css" />
+    <!-- datetimepicker -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-datepicker.css" />
+    <!-- jQuery Ui for price range slide -->
+    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <!-- Responsive Css -->
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+    <style>
+        .room-status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-available {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-occupied {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .status-maintenance {
+            background: #dc3545;
+            color: white;
+        }
+
+        .amenities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .amenity-tag {
+            background: #f8f9fa;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .room-thumb {
+            position: relative;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .no-rooms {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body class="room-gird-page">
+    <!-- preloader -->
+    <div class="loader" id="preLoader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Header Start -->
+    <header>
+        <div class="header-top-area section-bg">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-xl-4 col-lg-7 offset-xl-3 col-md-6">
+                        <ul class="top-contact-info list-inline">
+                            <li><i class="far fa-map-marker-alt"></i>Yên Nghĩa Hà Đông</li>
+                            <li><i class="far fa-phone"></i>+84 357267599</li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-5 col-lg-5 col-md-6">
+                        <div class="top-right text-right">
+                            <ul class="top-social-icon list-inline d-inline">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google"></i></a></li>
+                            </ul>
+                            <ul class="top-menu list-inline d-inline ml-4" id="auth-navigation">
+                                <li class="auth-login"><a href="register.html"><i class="fa fa-user"
+                                            aria-hidden="true"></i> Register</a></li>
+                                <li class="auth-login"><a href="login.html"><i class="fa fa-lock"
+                                            aria-hidden="true"></i> Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-menu-area">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-7">
+                        <div class="logo">
+                            <a href="#"><img src="../assets/img/logo.png" alt="Avson"></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-8 col-5">
+                        <div class="menu-right-area text-right">
+                            <nav class="main-menu">
+                                <ul class="list-inline">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active-page"><a href="room-dynamic.html">Rooms</a></li>
+                                    <li><a href="service.html">Services</a></li>
+                                    <li><a href="blog.html">News</a></li>
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </nav>
+                            <div class="quote-btn">
+                                <a href="admin-rooms.html" class="btn filled-btn">Quản lý phòng <i
+                                        class="far fa-cog"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobilemenu"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Wrap start -->
+    <main>
+        <!-- Breadcrumb section -->
+        <section class="breadcrumb-area d-flex align-items-center position-relative bg-img-center"
+            style="background-image: url(../assets/img/bg/breadcrumb-01.jpg);">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h1>Danh sách phòng</h1>
+                    <ul class="list-inline">
+                        <li><a href="index.html">Home</a></li>
+                        <li><i class="far fa-angle-double-right"></i></li>
+                        <li>Rooms</li>
+                    </ul>
+                </div>
+            </div>
+            <h1 class="big-text">Room</h1>
+        </section>
+
+        <!-- Room Filter & Search -->
+        <section class="filter-section section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <select class="form-control" id="roomTypeFilter">
+                            <option value="">Tất cả loại phòng</option>
+                            <option value="Single">Phòng đơn</option>
+                            <option value="Double">Phòng đôi</option>
+                            <option value="Suite">Phòng suite</option>
+                            <option value="Deluxe">Phòng deluxe</option>
+                            <option value="Presidential">Phòng tổng thống</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <select class="form-control" id="statusFilter">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="available">Còn trống</option>
+                            <option value="occupied">Đã đặt</option>
+                            <option value="maintenance">Bảo trì</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-8 mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="minPrice" placeholder="Giá từ">
+                            </div>
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="maxPrice" placeholder="Giá đến">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 mb-3">
+                        <button class="btn btn-primary btn-block" onclick="filterRooms()">
+                            <i class="fas fa-search"></i> Lọc
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Room List Section -->
+        <section class="rooms-warp section-bg section-padding">
+            <div class="container">
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>Đang tải danh sách phòng...</p>
+                </div>
+
+                <!-- No Rooms State -->
+                <div id="noRoomsState" class="no-rooms" style="display: none;">
+                    <i class="fas fa-bed fa-3x mb-3"></i>
+                    <h4>Không có phòng nào</h4>
+                    <p>Hiện tại chưa có phòng nào trong hệ thống hoặc không có phòng phù hợp với bộ lọc của bạn.</p>
+                </div>
+
+                <!-- Room Grid -->
+                <div class="row" id="roomsContainer" style="display: none;">
+                    <!-- Rooms will be loaded here -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="row mt-4" id="paginationContainer" style="display: none;">
+                    <div class="col-12">
+                        <nav aria-label="Room pagination">
+                            <ul class="pagination justify-content-center" id="pagination">
+                                <!-- Pagination will be generated here -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Start -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <div class="footer-logo">
+                                <img src="../assets/img/logo.png" alt="Logo">
+                            </div>
+                            <p>Hệ thống đặt phòng khách sạn hiện đại và tiện lợi</p>
+                            <ul class="social-icons">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <h4 class="widget-title">Liên kết nhanh</h4>
+                            <ul class="nav-widget clearfix">
+                                <li><a href="#">Dịch vụ mới nhất</a></li>
+                                <li><a href="#">Lịch sử của chúng tôi</a></li>
+                                <li><a href="#">Tuyển dụng</a></li>
+                                <li><a href="#">Tài khoản của tôi</a></li>
+                                <li><a href="#">Gặp gỡ đội ngũ</a></li>
+                                <li><a href="#">Bảo mật web</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget footer-widget">
+                            <h4 class="widget-title">Liên hệ</h4>
+                            <div class="contact-widget">
+                                <p><i class="far fa-map-marker-alt"></i> Yên Nghĩa Hà Đông</p>
+                                <p><i class="far fa-phone"></i> +84 357267599</p>
+                                <p><i class="far fa-envelope"></i> info@hotel.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="footer-nav">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Rooms</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="copy-right text-right">Copyright ©2024. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap-4.4.1.min.js"></script>
+    <script src="../assets/js/slick.min-1.9.0.js"></script>
+    <script src="../assets/js/meanmenu-2.0.7.min.js"></script>
+    <script src="../assets/js/wow-1.1.3.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+    <script>
+        // API Configuration
+        const API_BASE = 'http://localhost:3003/api'; // Adjust port as needed
+
+        let currentPage = 1;
+        let roomsPerPage = 6;
+        let allRooms = [];
+        let filteredRooms = [];
+
+        // Load rooms on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadRooms();
+        });
+
+        // Load all rooms from API
+        async function loadRooms() {
+            try {
+                showLoading(true);
+                const response = await fetch(`${API_BASE}/rooms`);
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch rooms');
+                }
+
+                allRooms = await response.json();
+                filteredRooms = [...allRooms];
+
+                showLoading(false);
+                displayRooms();
+
+            } catch (error) {
+                console.error('Error loading rooms:', error);
+                showLoading(false);
+                showNoRooms(true);
+                alert('Không thể tải danh sách phòng. Vui lòng kiểm tra kết nối API.');
+            }
+        }
+
+        // Show/hide loading state
+        function showLoading(show) {
+            document.getElementById('loadingState').style.display = show ? 'block' : 'none';
+            document.getElementById('roomsContainer').style.display = show ? 'none' : 'block';
+            document.getElementById('paginationContainer').style.display = show ? 'none' : 'block';
+        }
+
+        // Show/hide no rooms state
+        function showNoRooms(show) {
+            document.getElementById('noRoomsState').style.display = show ? 'block' : 'none';
+            document.getElementById('roomsContainer').style.display = show ? 'none' : 'block';
+            document.getElementById('paginationContainer').style.display = show ? 'none' : 'block';
+        }
+
+        // Display rooms with pagination
+        function displayRooms() {
+            const container = document.getElementById('roomsContainer');
+
+            if (filteredRooms.length === 0) {
+                showNoRooms(true);
+                return;
+            }
+
+            showNoRooms(false);
+
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredRooms.length / roomsPerPage);
+            const startIndex = (currentPage - 1) * roomsPerPage;
+            const endIndex = startIndex + roomsPerPage;
+            const roomsToShow = filteredRooms.slice(startIndex, endIndex);
+
+            // Generate room HTML
+            container.innerHTML = roomsToShow.map(room => createRoomHTML(room)).join('');
+
+            // Update pagination
+            updatePagination(totalPages);
+        }
+
+        // Create HTML for a single room
+        function createRoomHTML(room) {
+            const statusClass = getStatusClass(room.status);
+            const statusText = getStatusText(room.status);
+            const amenitiesHTML = createAmenitiesHTML(room.amenities);
+            const price = formatPrice(room.price);
+
+            return `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="single-room">
+                        <div class="room-thumb">
+                            <img src="${room.mainImage || '../assets/img/room/default-room.jpg'}" 
+                                 alt="Room ${room.roomNumber}" 
+                                 style="width: 100%; height: 250px; object-fit: cover;">
+                            <span class="room-status-badge ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="room-desc">
+                            <div class="room-cat">
+                                <p>${room.roomType}</p>
+                            </div>
+                            <h4><a href="room-details.html?id=${room.id}">Phòng ${room.roomNumber}</a></h4>
+                            <p>${room.description || 'Phòng thoải mái với đầy đủ tiện nghi hiện đại'}</p>
+                            ${amenitiesHTML}
+                            <div class="room-price mt-3">
+                                <p>${price} VNĐ/đêm</p>
+                            </div>
+                            <div class="room-book float-right">
+                                ${room.status === 'available' ?
+                    `<a href="booking.html?roomId=${room.id}" class="btn btn-primary">Đặt ngay</a>` :
+                    `<span class="btn btn-secondary disabled">Không khả dụng</span>`
+                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create amenities HTML
+        function createAmenitiesHTML(amenities) {
+            if (!amenities || amenities.length === 0) return '';
+
+            const amenityLabels = {
+                wifi: 'WiFi',
+                ac: 'Điều hòa',
+                tv: 'TV',
+                minibar: 'Minibar',
+                balcony: 'Ban công',
+                bathtub: 'Bồn tắm',
+                room_service: 'Dịch vụ phòng',
+                safe: 'Két an toàn',
+                parking: 'Bãi đỗ xe'
+            };
+
+            const amenityTags = amenities.slice(0, 4).map(amenity =>
+                `<span class="amenity-tag">${amenityLabels[amenity] || amenity}</span>`
+            ).join('');
+
+            return `<div class="amenities-list">${amenityTags}</div>`;
+        }
+
+        // Helper functions
+        function getStatusClass(status) {
+            switch (status) {
+                case 'available': return 'status-available';
+                case 'occupied': return 'status-occupied';
+                case 'maintenance': return 'status-maintenance';
+                default: return 'status-available';
+            }
+        }
+
+        function getStatusText(status) {
+            switch (status) {
+                case 'available': return 'Còn trống';
+                case 'occupied': return 'Đã đặt';
+                case 'maintenance': return 'Bảo trì';
+                default: return 'Không xác định';
+            }
+        }
+
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN').format(price);
+        }
+
+        // Filter rooms
+        async function filterRooms() {
+            const roomType = document.getElementById('roomTypeFilter').value;
+            const status = document.getElementById('statusFilter').value;
+            const minPrice = document.getElementById('minPrice').value;
+            const maxPrice = document.getElementById('maxPrice').value;
+
+            try {
+                showLoading(true);
+
+                // Build query parameters
+                const queryParams = new URLSearchParams();
+                if (roomType) queryParams.append('roomType', roomType);
+                if (status) queryParams.append('status', status);
+                if (minPrice) queryParams.append('minPrice', minPrice);
+                if (maxPrice) queryParams.append('maxPrice', maxPrice);
+
+                const response = await fetch(`${API_BASE}/rooms?${queryParams}`);
+                if (!response.ok) throw new Error('Failed to filter rooms');
+
+                filteredRooms = await response.json();
+                currentPage = 1; // Reset to first page
+
+                showLoading(false);
+                displayRooms();
+
+            } catch (error) {
+                console.error('Error filtering rooms:', error);
+                showLoading(false);
+                alert('Lỗi khi lọc phòng');
+            }
+        }
+
+        // Pagination
+        function updatePagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+
+            if (totalPages <= 1) {
+                document.getElementById('paginationContainer').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('paginationContainer').style.display = 'block';
+
+            let paginationHTML = '';
+
+            // Previous button
+            if (currentPage > 1) {
+                paginationHTML += `<li class="page-item">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Trước</a>
+                </li>`;
+            }
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<li class="page-item active">
+                        <span class="page-link">${i}</span>
+                    </li>`;
+                } else {
+                    paginationHTML += `<li class="page-item">
+                        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                    </li>`;
+                }
+            }
+
+            // Next button
+            if (currentPage < totalPages) {
+                paginationHTML += `<li class="page-item">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Sau</a>
+                </li>`;
+            }
+
+            pagination.innerHTML = paginationHTML;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            displayRooms();
+            window.scrollTo(0, 0);
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('roomTypeFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+
+            filteredRooms = [...allRooms];
+            currentPage = 1;
+            displayRooms();
+        }
+    </script>
+</body>
+
+</html>

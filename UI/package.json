@@ -1,0 +1,24 @@
+{
+    "name": "booking-room-frontend",
+    "version": "1.0.0",
+    "description": "Frontend for Booking Room Application",
+    "main": "static-server.js",
+    "scripts": {
+        "start": "node static-server.js",
+        "dev": "node static-server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "keywords": [
+        "booking",
+        "room",
+        "frontend",
+        "static"
+    ],
+    "author": "Booking Room Team",
+    "license": "MIT"
+}
